@@ -1,0 +1,25 @@
+# Core
+streamlit==1.39.0
+python-dotenv==1.0.0
+
+# Supabase
+supabase==2.9.0
+postgrest==0.17.0
+
+# Data manipulation
+pandas==2.2.0
+numpy==1.26.3
+
+# Visualization
+plotly==5.18.0
+
+# Email
+python-multipart==0.0.6
+
+# Utils
+Pillow==10.2.0
+python-dateutil==2.8.2
+
+# Validation
+email-validator==2.1.0
+phonenumbers==8.13.27
