@@ -14,10 +14,10 @@ def format_price(price: Union[int, float], include_currency: bool = True) -> str
         include_currency: Inclure le symbole € ou non
     
     Returns:
-        Prix formaté (ex: "25 000 €" ou "25 000")
+        Prix formaté (ex: "25 000 FCFA" ou "25 000")
     """
     if price is None:
-        return "0 €" if include_currency else "0"
+        return "0 FCFA" if include_currency else "0"
     
     # Convertir en entier (pas de décimales)
     price_int = int(price)
@@ -26,7 +26,7 @@ def format_price(price: Union[int, float], include_currency: bool = True) -> str
     formatted = f"{price_int:,}".replace(",", " ")
     
     if include_currency:
-        return f"{formatted} €"
+        return f"{formatted} FCFA"
     
     return formatted
 

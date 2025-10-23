@@ -11,7 +11,7 @@ from utils.session import (init_session_state, get_cart_total, clear_cart,
                            set_flash_message, display_flash_message)
 from utils.validators import validate_checkout_form
 from utils.formatters import format_price
-from config.email_config import send_order_confirmation, send_admin_notification
+from config.email_config import send_admin_notification
 from utils.styling import load_custom_styling, build_header
 
 # Configuration
@@ -201,7 +201,6 @@ with col_form:
                                 
                                 # Envoyer les emails
                                 try:
-                                    send_order_confirmation(order_data, client_data)
                                     send_admin_notification(order_data, client_data)
                                 except Exception as e:
                                     # Ne pas bloquer la commande si l'email échoue
@@ -232,9 +231,6 @@ with col_form:
                                     <p style="color: #E5E5E5 !important; font-size: 1.3rem; font-weight: 700; margin-bottom: 1rem; text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.9);">
                                         <strong>Montant total:</strong> <span style="color: #D4AF37;">{format_price(total)} FCFA</span>
                                     </p>
-                                    <p style="color: #E5E5E5 !important; text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.9);">
-                                        Un email de confirmation a été envoyé à <strong>{email}</strong>
-                                    </p>
                                     <p style="color: #CCCCCC !important; margin-top: 1rem; font-size: 0.95rem; text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.9);">
                                         Nous préparons votre commande de parfums & essences avec soin.<br>
                                         Vous serez tenu informé de son expédition.
@@ -263,9 +259,8 @@ with col1:
     ">
         <h3 style="color: #D4AF37 !important; text-align: center; margin-bottom: 1rem;">🚚 Livraison</h3>
         <ul style="color: #E5E5E5 !important; line-height: 1.8; text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.9);">
-            <li>Livraison gratuite</li>
+            <li>Livraison à la charge du client</li>
             <li>Délai: 3-5 jours ouvrés</li>
-            <li>Suivi de colis disponible</li>
             <li>Emballage soigné</li>
         </ul>
     </div>
@@ -301,7 +296,7 @@ with col3:
     ">
         <h3 style="color: #D4AF37 !important; text-align: center; margin-bottom: 1rem;">📞 Support</h3>
         <ul style="color: #E5E5E5 !important; line-height: 1.8; text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.9);">
-            <li>📧 contact@sensations-arda.com</li>
+            <li>📧 sensationsbyarda@gmail.com</li>
             <li>📱 +241 XX XX XX XX</li>
             <li>🕐 Lun-Sam, 9h-19h</li>
             <li>💬 Assistance dédiée</li>

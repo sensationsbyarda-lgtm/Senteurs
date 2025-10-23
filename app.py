@@ -1,6 +1,7 @@
 """
 Sensations by Arda J - Application E-commerce Streamlit
 Page d'accueil avec catalogue intégré - Prix en Franc CFA
+VERSION CORRIGÉE
 """
 
 import streamlit as st
@@ -40,24 +41,24 @@ def main():
         background: linear-gradient(135deg, rgba(212, 175, 55, 0.15) 0%, rgba(255, 215, 0, 0.15) 100%);
         border: 1px solid rgba(212, 175, 55, 0.4);
         border-radius: 15px;
-        padding: 1.5rem;
-        margin-bottom: 2rem;
+        padding: 1.2rem;
+        margin-bottom: 1.5rem;
         backdrop-filter: blur(10px);
         box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
     ">
         <h2 style="
             color: #D4AF37 !important;
-            margin: 0 0 0.5rem 0 !important;
-            font-size: 1.8rem !important;
+            margin: 0 0 0.4rem 0 !important;
+            font-size: 1.6rem !important;
             font-family: 'Playfair Display', serif !important;
         ">🌟 Bienvenue chez Sensations by Arda J 🌟</h2>
         <p style="
             color: #E5E5E5 !important;
             margin: 0 !important;
-            font-size: 1.1rem;
+            font-size: 1rem;
             text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.9);
             font-style: italic;
-        ">Découvrez notre collection exclusive de parfums & essences d'exception</p>
+        ">Découvrez notre collection exclusive de parfums, essences & senteurs d'exception</p>
     </div>
     """, unsafe_allow_html=True)
     
@@ -91,7 +92,7 @@ def main():
     products = Product.get_all(search=search_query, filter_type=filter_type)
     
     if not products:
-        st.info("😔 Aucune senteur trouvée. Essayez d'autres critères de recherche.")
+        st.info("😢 Aucune senteur trouvée. Essayez d'autres critères de recherche.")
     else:
         # Nombre de produits trouvés
         st.markdown(f"""
@@ -99,7 +100,7 @@ def main():
             color: #D4AF37;
             font-size: 1.1rem;
             font-weight: 600;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1.2rem;
             text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.9);
         ">
             ✨ {len(products)} senteur(s) d'exception
@@ -134,9 +135,9 @@ def main():
                                 desc = product['description'][:80] + "..." if len(product['description']) > 80 else product['description']
                                 st.caption(desc)
                             
-                            # Prix en CFA
+                            # Prix
                             st.markdown(
-                                f"<p style='font-size: 1.25rem; font-weight: 700; color: #D4AF37; margin: 0.5rem 0; text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.9);'>{format_price(product['price'])}</p>", 
+                                f"<p style='font-size: 1.1rem; font-weight: 700; color: #D4AF37; margin: 0.4rem 0; text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.9);'>{format_price(product['price'])}</p>", 
                                 unsafe_allow_html=True
                             )
                             
@@ -195,9 +196,9 @@ def main():
                     
                     st.divider()
                     
-                    # Prix en CFA
+                    # Prix
                     st.markdown(
-                        f"<p style='font-size: 1.75rem; font-weight: 700; color: #D4AF37; text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.9);'>{format_price(product['price'])}</p>", 
+                        f"<p style='font-size: 1.5rem; font-weight: 700; color: #D4AF37; text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.9);'>{format_price(product['price'])}</p>", 
                         unsafe_allow_html=True
                     )
                     
@@ -220,7 +221,7 @@ def main():
                         col_a, col_b = st.columns(2)
                         
                         with col_a:
-                            if st.button("🛒 Ajouter au panier", use_container_width=True, type="primary"):
+                            if st.button("Ajouter au panier", use_container_width=True, type="primary"):
                                 product_data = {
                                     'name': product['name'],
                                     'price': product['price'],
@@ -239,74 +240,24 @@ def main():
                                 st.session_state['selected_product'] = None
                                 st.rerun()
                     else:
-                        st.error("😔 Cette senteur est actuellement en rupture de stock")
+                        st.error("😢 Cette senteur est actuellement en rupture de stock")
                         if st.button("Fermer", use_container_width=True):
                             st.session_state['selected_product'] = None
                             st.rerun()
             
             show_product_details()
     
-    # Section des collections
+    # Section des collections - PLUS DE CATÉGORIES
+    #A faire
+
+    # BOUTON COMMANDER EN BAS
     st.divider()
-    st.markdown("### ✨ Nos Collections")
+    col_empty1, col_button, col_empty2 = st.columns([1, 2, 1])
+    with col_button:
+        if st.button("📦 PASSER COMMANDE", use_container_width=True, type="primary"):
+            st.switch_page("pages/3_Checkout.py")
     
-    col1, col2, col3 = st.columns(3)
-    
-    with col1:
-        st.markdown("""
-        <div style="
-            background: rgba(20, 20, 20, 0.9);
-            border: 1px solid rgba(212, 175, 55, 0.3);
-            border-radius: 15px;
-            padding: 1.5rem;
-            text-align: center;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
-        ">
-            <div style="font-size: 3rem; margin-bottom: 1rem;">👨</div>
-            <h3 style="color: #D4AF37 !important; margin-bottom: 0.5rem;">Pour Homme</h3>
-            <p style="color: #E5E5E5 !important; text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.9);">
-                Des fragrances boisées et épicées qui évoquent la force et l'élégance masculine.
-            </p>
-        </div>
-        """, unsafe_allow_html=True)
-    
-    with col2:
-        st.markdown("""
-        <div style="
-            background: rgba(20, 20, 20, 0.9);
-            border: 1px solid rgba(212, 175, 55, 0.3);
-            border-radius: 15px;
-            padding: 1.5rem;
-            text-align: center;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
-        ">
-            <div style="font-size: 3rem; margin-bottom: 1rem;">👩</div>
-            <h3 style="color: #D4AF37 !important; margin-bottom: 0.5rem;">Pour Femme</h3>
-            <p style="color: #E5E5E5 !important; text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.9);">
-                Des senteurs florales et délicates qui révèlent la féminité et la sensualité.
-            </p>
-        </div>
-        """, unsafe_allow_html=True)
-    
-    with col3:
-        st.markdown("""
-        <div style="
-            background: rgba(20, 20, 20, 0.9);
-            border: 1px solid rgba(212, 175, 55, 0.3);
-            border-radius: 15px;
-            padding: 1.5rem;
-            text-align: center;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
-        ">
-            <div style="font-size: 3rem; margin-bottom: 1rem;">🤝</div>
-            <h3 style="color: #D4AF37 !important; margin-bottom: 0.5rem;">Mixte</h3>
-            <p style="color: #E5E5E5 !important; text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.9);">
-                Des compositions unisexes audacieuses pour tous les amoureux de senteurs d'exception.
-            </p>
-        </div>
-        """, unsafe_allow_html=True)
-    
-    # Footer
+    # Footer avec bon email
     st.divider()
     st.markdown("""
     <div style="
@@ -314,20 +265,18 @@ def main():
         background: rgba(10, 10, 10, 0.95);
         border: 1px solid rgba(212, 175, 55, 0.3);
         border-radius: 15px;
-        padding: 2rem;
-        margin-top: 3rem;
+        padding: 1.5rem;
+        margin-top: 2rem;
         box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
     ">
-        <p style="color: #D4AF37 !important; font-size: 1.2rem; font-weight: 600; margin-bottom: 1rem;">
-            ✨ Sensations by Arda J - Parfums & Essences d'Exception ✨
+        <p style="color: #D4AF37 !important; font-size: 1.1rem; font-weight: 600; margin-bottom: 0.8rem;">
+            ✨ Sensations by Arda J - Parfums, Essences & Senteurs d'Exception ✨
         </p>
-        <p style="color: #CCCCCC !important; font-size: 0.9rem; margin: 0.5rem 0;">
-            © 2024 Sensations by Arda J - Tous droits réservés
+        <p style="color: #CCCCCC !important; font-size: 0.9rem; margin: 0.4rem 0;">
+            © 2025 Sensations by Arda J - Tous droits réservés
         </p>
         <p style="color: #CCCCCC !important; font-size: 0.9rem;">
-            <a href="mailto:contact@sensations-arda.com" style="color: #D4AF37; text-decoration: none;">📧 Contact</a> | 
-            <a href="#" style="color: #D4AF37; text-decoration: none;">📜 Mentions légales</a> | 
-            <a href="#" style="color: #D4AF37; text-decoration: none;">🔒 Confidentialité</a>
+            <a href="mailto:sensationsbyarda@gmail.com" style="color: #D4AF37; text-decoration: none;">📧 sensationsbyarda@gmail.com</a> | 
         </p>
     </div>
     """, unsafe_allow_html=True)
