@@ -5,6 +5,8 @@ VERSION CORRIGÉE
 """
 
 import streamlit as st
+from dotenv import load_dotenv # <-- AJOUTER
+load_dotenv() # <-- AJOUTER
 from config.supabase_client import init_supabase
 from models.product import Product
 from utils.session import (init_session_state, add_to_cart, set_flash_message, 

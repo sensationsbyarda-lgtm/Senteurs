@@ -4,6 +4,8 @@ Sensations by Arda J - Parfums & Essences - Gabon
 """
 
 import streamlit as st
+from dotenv import load_dotenv # <-- AJOUTER
+load_dotenv() # <-- AJOUTER
 from config.supabase_client import init_supabase
 from models.order import Order
 from models.client import Client

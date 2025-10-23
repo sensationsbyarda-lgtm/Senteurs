@@ -5,10 +5,9 @@ Configuration et initialisation du client Supabase
 import os
 import streamlit as st
 from supabase import create_client, Client
-from dotenv import load_dotenv
 
-# Charger les variables d'environnement
-load_dotenv()
+
+
 
 def init_supabase() -> Client:
     """

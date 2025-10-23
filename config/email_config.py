@@ -8,10 +8,9 @@ from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from email.mime.base import MIMEBase
 from email import encoders
-from dotenv import load_dotenv
 from datetime import datetime
 
-load_dotenv()
+
 
 def send_email(to_email: str, subject: str, html_content: str, attachment_path: str = None) -> bool:
     """

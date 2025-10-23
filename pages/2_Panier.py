@@ -4,6 +4,8 @@ Sensations by Arda J - Parfums & Essences
 """
 
 import streamlit as st
+from dotenv import load_dotenv # <-- AJOUTER
+load_dotenv() # <-- AJOUTER
 from config.supabase_client import init_supabase
 from utils.session import (init_session_state, get_cart_total, get_cart_count, 
                            update_cart_quantity, remove_from_cart, display_flash_message,
